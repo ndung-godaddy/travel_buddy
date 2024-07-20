@@ -6,7 +6,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 
 import useStyles from './styles'
 
-const Details = ({ place }) => {
+const Details = ({ place, selected, refProp }) => {
+
+    if(selected) refProp?.current?.scrollIntoView({behavio: "smooth", block: "start"})
     const classes = useStyles();
 
     return (
@@ -18,6 +20,11 @@ const Details = ({ place }) => {
             />
             <CardContent>
                 <Typography gutterBottom variant="h5">
+                <Box display="flex" justifyContent="space-between" mb={2}>
+                    <Rating value={Number(place.rating)} readOnly/>
+                    <Typography variant='subtitle1'>{place.num_reviews || 'N/A'}Reviews</Typography>
+                </Box>
+                
                     {place.name}
                 </Typography>
                 <Box display="flex" justifyContent="space-between" mb={2}>
@@ -53,7 +60,7 @@ const Details = ({ place }) => {
                         ))}
                     </Box>
                 ) : (
-                    <Typography variant="body2" color="textSecondary">No awards available.</Typography>
+                    <Typography variant="body2" color="textSecondary"></Typography>
                 )}
                 {place?.cuisine?.map(({name}) =>(
                     <Chip key={name} size='small' label={name} className={classes.chip}/>
@@ -68,6 +75,14 @@ const Details = ({ place }) => {
                         <PhoneIcon/> {place.phone}
                     </Typography>
                 )}
+                <CardActions>
+                    <Button sixe="small" color = "primary" onClick={()=> window.open(place.web_url, '_blank')}>
+                        Travel Advisor
+                    </Button>
+                    <Button sixe="small" color = "primary" onClick={()=> window.open(place.websiite, '_blank')}>
+                        Website
+                    </Button>
+                </CardActions>
             </CardContent>
         </Card>
     );

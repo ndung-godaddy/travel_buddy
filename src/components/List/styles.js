@@ -4,8 +4,9 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     // margin: theme.spacing(1),
-    minWidth: 120,
+    width: '300px',
     marginBottom: '30px',
+
   },
   selectEmpty: {
     // marginTop: theme.spacing(2),
